@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            const preloader = document.querySelector('.preloader');
+            const isHomepage = window.location.pathname === "/" || window.location.pathname === "/index.php"; // Tjekker om brugeren er på hjemmesiden
+    
+            window.addEventListener('load', function() {
+                if (isHomepage) {
+                    setTimeout(function() {
+                        fadeOutPreloader(); // Venter 6 sekunder før udtoning på hjemmesiden
+                    }, 6000);
+                } else {
+                    removePreloaderImmediately(); // Fjerner preloaderen øjeblikkeligt på alle andre sider
+                }
+            });
+    
+            function fadeOutPreloader() {
+                preloader.style.transition = 'opacity 0.5s ease-out'; // Gør overgangen til at fade preloaderen ud glidende
+                preloader.style.opacity = 0; // Starter udtoningen
+                setTimeout(function() {
+                    preloader.remove(); // Fjerner preloaderen fra DOM efter udtoningen
+                }, 500); // Tid efter hvilken preloaderen fjernes efter udtoningen starter
+            }
+    
+            function removePreloaderImmediately() {
+                if (preloader) {
+                    preloader.remove(); // Fjerner preloaderen øjeblikkeligt fra DOM uden nogen udtoning
+                }
+            }
+        });
+    </script>
+    
+</head>
+<body>
+    <div class="preloader">
+        <video autoplay loop muted playsinline>
+            <source src="https://maico-nordic.evajanke.dk/wp-content/uploads/2024/05/maico_preloader-2.mp4" type="video/mp4">
+        </video>
+    </div>
+</body>
+</html>
